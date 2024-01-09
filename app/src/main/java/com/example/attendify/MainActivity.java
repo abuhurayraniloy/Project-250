@@ -23,8 +23,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     ArrayList<ClassItem> classItems = new ArrayList<>();
 
-    EditText class_edit;
-    EditText subject_edit;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -44,30 +43,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View view = LayoutInflater.from(this).inflate(R.layout.class_dialog, null);
-
-        builder.setView(view);
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
-        class_edit = view.findViewById(R.id.class_edit);
-        subject_edit = view.findViewById(R.id.subject_edit);
-
-        Button cancel = view.findViewById(R.id.cancel_btn);
-        Button add = view.findViewById(R.id.add_btn);
-
-        cancel.setOnClickListener(v-> dialog.dismiss());
-        add.setOnClickListener(v-> {
-            addClass();
-            dialog.dismiss();
-        });
+        MyDialog dialog = new MyDialog();
+        dialog.show(getSupportFragmentManager(), MyDialog.CLASS_ADD_DIALIOG);
+        dialog.setListener((className, subjectName)->addClass(className, subjectName));
     }
 
-    private void addClass() {
-        String className = class_edit.getText().toString();
-        String subjectName = subject_edit.getText().toString();
+    private void addClass(String className, String subjectName) {
+
         classItems.add(new ClassItem(className,subjectName));
         classAdapter.notifyDataSetChanged();
     }
