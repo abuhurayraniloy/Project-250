@@ -15,13 +15,13 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
     ArrayList<ClassItem> classItems;
     Context context;
 
-    private OnItemClickListener onItemClickListenerClickListener;
+    private OnItemClickListener onItemClickListener;
     public interface OnItemClickListener{
         void onClick(int position);
     }
 
-    public void setOnItemClickListenerClickListener(OnItemClickListener onItemClickListenerClickListener) {
-        this.onItemClickListenerClickListener = onItemClickListenerClickListener;
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
     public ClassAdapter(Context context, ArrayList<ClassItem> classItems) {
@@ -45,7 +45,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
     @Override
     public ClassViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.class_item,parent,false);
-        return new ClassViewHolder(itemView, onItemClickListenerClickListener);
+        return new ClassViewHolder(itemView, onItemClickListener);
     }
 
     @Override

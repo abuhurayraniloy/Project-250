@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         classAdapter = new ClassAdapter(this, classItems);
         recyclerView.setAdapter(classAdapter);
-        classAdapter.setOnItemClickListenerClickListener(position -> gotoItemActivity(position));
+        classAdapter.setOnItemClickListener(position -> gotoItemActivity(position));
 
         setToolbar();
     }
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void showDialog() {
         MyDialog dialog = new MyDialog();
-        dialog.show(getSupportFragmentManager(), MyDialog.CLASS_ADD_DIALIOG);
+        dialog.show(getSupportFragmentManager(), MyDialog.CLASS_ADD_DIALOG);
         dialog.setListener((className, subjectName)->addClass(className, subjectName));
     }
 
