@@ -35,8 +35,8 @@ public class StudentActivity extends AppCompatActivity {
         ImageButton back = toolbar.findViewById(R.id.back);
         ImageButton save = toolbar.findViewById(R.id.save);
 
-        title.setText("className");
-        subtitle.setText("subjectName");
+        title.setText(className);
+        subtitle.setText(subjectName);
 
         back.setOnClickListener(v-> onBackPressed());
     }
