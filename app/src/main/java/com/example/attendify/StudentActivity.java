@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -53,5 +54,25 @@ public class StudentActivity extends AppCompatActivity {
         subtitle.setText(subjectName);
 
         back.setOnClickListener(v-> onBackPressed());
+        toolbar.inflateMenu(R.menu.student_menu);
+        toolbar.setOnMenuItemClickListener(menuItem->onMenuItemClick(menuItem));
+    }
+
+    private boolean onMenuItemClick(MenuItem menuItem) {
+        if(menuItem.getItemId()==R.id.add_student){
+            showAddStudentDialog();
+        }
+        return true;
+    }
+
+    private void showAddStudentDialog() {
+        MyDialog dialog = new MyDialog();
+        dialog.show(getSupportFragmentManager(),MyDialog.STUDENT_ADD_DIALOG);
+        dialog.setListener((roll, name)->addStudent(roll, name));
+    }
+
+    private void addStudent(String roll, String name) {
+        studentItems.add(new StudentItem(roll, name));
+        adapter.notifyItemChanged(studentItems.size()-1);
     }
 }
