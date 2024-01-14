@@ -1,6 +1,8 @@
 package com.example.attendify;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -14,9 +16,9 @@ public class DbHelper extends SQLiteOpenHelper {
 
     //class table
     private static String CLASS_TABLE_NAME = "CLASS_TABLE";
-    private static String C_ID = "_CID";
-    private static String CLASS_NAME_KEY = "CLASS_NAME";
-    private static String SUBJECT_NAME_KEY = "SUBJECT_NAME";
+    public static String C_ID = "_CID";
+    public static String CLASS_NAME_KEY = "CLASS_NAME";
+    public static String SUBJECT_NAME_KEY = "SUBJECT_NAME";
 
     private String CREATE_CLASS_TABLE =
             "CREATE TABLE " + CLASS_TABLE_NAME + "( "+
@@ -86,5 +88,18 @@ public class DbHelper extends SQLiteOpenHelper {
         }catch (SQLException e){
             e.printStackTrace();
         }
+    }
+    long addClass (String className, String subjectName){
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(CLASS_NAME_KEY, className);
+        values.put(SUBJECT_NAME_KEY, subjectName);
+
+        return database.insert(CLASS_TABLE_NAME, null, values);
+    }
+
+    Cursor getClassTable(){
+        SQLiteDatabase database = this.getReadableDatabase();
+        return database.rawQuery(SELECT_CLASS_TABLE, null);
     }
 }
