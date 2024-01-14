@@ -29,7 +29,7 @@ public class DbHelper extends SQLiteOpenHelper {
                     ");";
 
     private static final String DROP_CLASS_TABLE = "DROP TABLE IF EXISTS " + CLASS_TABLE_NAME;
-    private static final String SELECT_CLASS_TABLE = "SELECT + FROM " + CLASS_TABLE_NAME;
+    private static final String SELECT_CLASS_TABLE = "SELECT * FROM " + CLASS_TABLE_NAME;
 
     //student table
     private static final String STUDENT_TABLE_NAME = "STUDENT_TABLE";
@@ -46,7 +46,7 @@ public class DbHelper extends SQLiteOpenHelper {
                     " FOREIGN KEY ( "+C_ID+") REFERENCES " + CLASS_TABLE_NAME+ "( "+C_ID+")"+
                     ");";
     private static final String DROP_STUDENT_TABLE = "DROP TABLE IF EXISTS " + STUDENT_TABLE_NAME;
-    private static final String SELECT_STUDENT_TABLE = "SELECT + FROM " + STUDENT_TABLE_NAME;
+    private static final String SELECT_STUDENT_TABLE = "SELECT * FROM " + STUDENT_TABLE_NAME;
 
     //status table
 
@@ -65,7 +65,7 @@ public class DbHelper extends SQLiteOpenHelper {
                     " FOREIGN KEY ( "+S_ID+") REFERENCES " + STATUS_TABLE_NAME+"( "+S_ID+")"+
                     ");";
     private static final String DROP_STATUS_TABLE = "DROP TABLE IF EXISTS " + STATUS_TABLE_NAME;
-    private static final String SELECT_STATUS_TABLE = "SELECT + FROM " + STATUS_TABLE_NAME;
+    private static final String SELECT_STATUS_TABLE = "SELECT * FROM " + STATUS_TABLE_NAME;
 
     public DbHelper(@Nullable Context context) {
         super(context, "Attendence.db", null, VERSION);
