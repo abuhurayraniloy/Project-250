@@ -23,7 +23,7 @@ public class StudentActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private StudentAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<StudentItem>studentItems = new ArrayList<>()
+    private ArrayList<StudentItem>studentItems = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
