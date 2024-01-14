@@ -2,12 +2,16 @@ package com.example.attendify;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 
 public class StudentActivity extends AppCompatActivity {
@@ -16,6 +20,10 @@ public class StudentActivity extends AppCompatActivity {
     private String className;
     private String subjectName;
     private int position;
+    private RecyclerView recyclerView;
+    private StudentAdapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private ArrayList<StudentItem>studentItems = new ArrayList<>()
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +34,12 @@ public class StudentActivity extends AppCompatActivity {
         subjectName = intent.getStringExtra("subjectName");
         position = intent.getIntExtra("position", -1);
         setToolbar();
+        recyclerView = findViewById(R.id.student_recycler);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new StudentAdapter(this, studentItems);
+        recyclerView.setAdapter(adapter);
     }
 
     private void setToolbar() {
