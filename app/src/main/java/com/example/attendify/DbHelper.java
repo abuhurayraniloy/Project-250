@@ -15,21 +15,21 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;
 
     //class table
-    private static String CLASS_TABLE_NAME = "CLASS_TABLE";
-    public static String C_ID = "_CID";
-    public static String CLASS_NAME_KEY = "CLASS_NAME";
-    public static String SUBJECT_NAME_KEY = "SUBJECT_NAME";
+    private static final String CLASS_TABLE_NAME = "CLASS_TABLE";
+    public static final String C_ID = "_CID";
+    public static final String CLASS_NAME_KEY = "CLASS_NAME";
+    public static final String SUBJECT_NAME_KEY = "SUBJECT_NAME";
 
     private String CREATE_CLASS_TABLE =
-            "CREATE TABLE " + CLASS_TABLE_NAME + "( "+
-                    C_ID + "INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "+
+            "CREATE TABLE " + CLASS_TABLE_NAME + "("+
+                    C_ID + "INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"+
                     CLASS_NAME_KEY + "TEXT NOT NULL,"+
                     SUBJECT_NAME_KEY + "TEXT NOT NULL,"+
-                    "UNIQUE ("+ CLASS_NAME_KEY +  "," + SUBJECT_NAME_KEY + ")" +
+                    "UNIQUE ("+ CLASS_NAME_KEY + ","+ SUBJECT_NAME_KEY +")"+
                     ");";
 
-    private static final String DROP_CLASS_TABLE = "DROP TABLE IF EXISTS " + CLASS_TABLE_NAME;
-    private static final String SELECT_CLASS_TABLE = "SELECT * FROM " + CLASS_TABLE_NAME;
+    private static final String DROP_CLASS_TABLE = "DROP TABLE IF EXISTS "+CLASS_TABLE_NAME;
+    private static final String SELECT_CLASS_TABLE = "SELECT * FROM "+CLASS_TABLE_NAME;
 
     //student table
     private static final String STUDENT_TABLE_NAME = "STUDENT_TABLE";
@@ -42,8 +42,9 @@ public class DbHelper extends SQLiteOpenHelper {
                     "( "+
                     S_ID+" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "+
                     C_ID+" INTEGER NOT NULL, "+
+                    STUDENT_NAME_KEY + " TEXT NOT NULL, " +
                     STUDENT_ROLL_KEY+" INTEGER, "+
-                    " FOREIGN KEY ( "+C_ID+") REFERENCES " + CLASS_TABLE_NAME+ "( "+C_ID+")"+
+                    " FOREIGN KEY ( "+C_ID+") REFERENCES " + CLASS_TABLE_NAME + "("+C_ID+")"+
                     ");";
     private static final String DROP_STUDENT_TABLE = "DROP TABLE IF EXISTS " + STUDENT_TABLE_NAME;
     private static final String SELECT_STUDENT_TABLE = "SELECT * FROM " + STUDENT_TABLE_NAME;
@@ -61,14 +62,15 @@ public class DbHelper extends SQLiteOpenHelper {
                     STATUS_ID+" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "+
                     S_ID+" INTEGER NOT NULL, "+
                     DATE_KEY+" DATE NOT NULL, "+
-                    "UNIQUE ("+S_ID+","+ DATE_KEY+"),"+
-                    " FOREIGN KEY ( "+S_ID+") REFERENCES " + STATUS_TABLE_NAME+"( "+S_ID+")"+
+                    STATUS_KEY + "TEXT NOT NULL, "+
+                    "UNIQUE ("+S_ID + "," + DATE_KEY+"),"+
+                    " FOREIGN KEY ( "+S_ID+") REFERENCES " + STUDENT_TABLE_NAME+"( "+S_ID+")"+
                     ");";
     private static final String DROP_STATUS_TABLE = "DROP TABLE IF EXISTS " + STATUS_TABLE_NAME;
     private static final String SELECT_STATUS_TABLE = "SELECT * FROM " + STATUS_TABLE_NAME;
 
     public DbHelper(@Nullable Context context) {
-        super(context, "Attendence.db", null, VERSION);
+        super(context, "Attendance.db", null, VERSION);
     }
 
 
